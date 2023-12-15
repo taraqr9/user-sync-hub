@@ -19,3 +19,6 @@ Route::get('/', function () {
 });
 
 Route::get('/users', [UserController::class, 'broadcast']);
+Route::get('/get-sock', function (){
+    return view('websocket');
+});

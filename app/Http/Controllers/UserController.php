@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\UserDataEvent;
+use App\Jobs\BroadcastUserDataJob;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 
 class UserController extends Controller
 {
-    public function broadcast()
+    public function broadcast(): JsonResponse
     {
-        $users = User::query()->find(1);
+        User::chunk(200, function ($users) {
+            foreach ($users as $user) {
+                BroadcastUserDataJob::dispatch($user);
+            }
+        });
 
-            broadcast(new UserDataEvent($users));
-//        foreach ($users as $user) {
-//            usleep(50000); // 50 milliseconds, adjust as necessary
-//        }
-
-        return response()->json(['message' => 'User data broadcasted successfully']);
+        return response()->json(['message' => 'User data broadcast successfully']);
     }
 }
