@@ -31,7 +31,12 @@ Access the API to retrieve the entire user dataset:
 GET http://your-app-url/api/users
 ``
 
-Access the url down below and goto browser->inspect->console, you will be able to see the data:     
+Access the url down below and goto browser->inspect->console, you will be able to see the data:
+* Run in terminal
 ``
-GET http://your-app-url/get-users
+npm run dev
+``
+and visit
+``
+http://your-app-url/get-users
 ``
