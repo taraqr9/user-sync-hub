@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\Api\AuthController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,16 +14,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group([
-
-    'middleware' => 'api',
     'namespace' => 'App\Http\Controllers\Api',
-
 ], function ($router) {
-
     Route::post('login', 'AuthController@login')->name('login');
     Route::post('register', 'AuthController@register')->name('register');
+});
+
+Route::group([
+    'middleware' => 'auth:api',
+    'namespace' => 'App\Http\Controllers\Api',
+], function ($router) {
+    Route::get('users', 'UserController@broadcast');
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
-
 });

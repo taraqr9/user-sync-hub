@@ -12,7 +12,7 @@ class BroadcastUserDataJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue;
 
-    public $user;
+    protected $user;
 
     public function __construct(User $user)
     {
@@ -21,6 +21,6 @@ class BroadcastUserDataJob implements ShouldQueue
 
     public function handle()
     {
-        event(new UserDataEvent($this->user));
+        broadcast(new UserDataEvent($this->user));
     }
 }

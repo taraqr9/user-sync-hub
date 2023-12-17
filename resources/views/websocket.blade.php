@@ -6,17 +6,11 @@
 
     <script>
         // For pusher
-        // setTimeout(() => {
-        //     window.Echo.channel('user-data')
-        //         .listen('.App\\Events\\UserDataEvent', (e) => {
-        //             console.log(e);
-        //         })
-        // }, 200)
-
-
-        Echo.channel('user-data')
-            .listen('UserDataEvent', (event) => {
-                console.log('Received UserDataEvent:', event);
-            });
+        setTimeout(() => {
+            window.Echo.channel('user-data')
+                .listen('.App\\Events\\UserDataEvent', (e) => {
+                    console.log(e);
+                })
+        }, 200)
     </script>
 </html>
